@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+//生成多文件
+option java_multiple_files = true;
+//包名
+option java_package = "io.grpc.examples.grpcDemoOne";
+
+//定义DemoOneRequest消息类型，用于客户端消息
+message DemoOneRequest{
+    string message = 1;
+}
+//定义DemoOneResponse消息类型，用于服务端消息返回
+message DemoOneResponse{
+    int64 code = 1;
+    string message = 2;
+}
+// 定义服务
+service DemoOneService {
+    // 服务中的方法，传过来一个DemoOneRequest类型的对象，返回一个DemoOneResponse类型的对象
+    rpc communication(DemoOneRequest) returns (DemoOneResponse) {}
+}
