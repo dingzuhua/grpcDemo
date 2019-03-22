@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+//生成多文件
+option java_multiple_files = true;
+//包名
+option java_package = "io.grpc.examples.MyAttention";
+
+//定义MyAttentionRequest消息类型，用于客户端消息
+message MyAttentionRequest{
+    string workId = 1;
+    int32 page = 2;
+    int32 number = 3;
+}
+
+//定义MyAttentionResponse消息类型，用于服务端消息返回
+message MyAttentionResponse{
+    repeated SeniorInfo seniorInfo = 1;// 复杂的对象List
+    int32 allNumber = 2;
+}
+//对象senior
+message SeniorInfo{
+    int64 seniorId = 1;
+    string name = 2;
+    string gender = 3;
+    int64 age = 4;
+    string address = 5;
+}
+// 定义服务
+service MyAttentionService {
+    // 服务中的方法，传过来一个MyAttentionRequest类型的对象，返回一个MyAttentionResponse类型的对象
+    rpc communication(MyAttentionRequest) returns (MyAttentionResponse) {}
+}
